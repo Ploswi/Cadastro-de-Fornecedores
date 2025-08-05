@@ -77,6 +77,14 @@ gcc -o fornecedores.exe fornecedores.c -lws2_32
 ## ✅ Exemplo de uso
 
 ```
+Modo de operacao:
+1 - Modo Normal (menu local)
+2 - Servidor TCP
+3 - Cliente TCP
+4 - Servidor HTTP
+5 - Sair
+Opcao: 1
+
 1-Adicionar
 2-Listar
 3-Remover
@@ -84,7 +92,7 @@ gcc -o fornecedores.exe fornecedores.c -lws2_32
 Opção: 1
 Nome: Universidade Federal de Rondonópolis
 CNPJ: 12345678000190
-Telefone: (11) 99999-9999
+Telefone: (66) 99999-9999
 Email: universidade@ufr.com.br
 ```
 
