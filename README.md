@@ -1,71 +1,78 @@
-# Sistema de Cadastro de Fornecedores
+# Sistema de Gerenciamento de Fornecedores
 
-Este projeto em linguagem C permite cadastrar, listar e remover **fornecedores** tanto localmente quanto via conexão **TCP (cliente-servidor)**.
+Este projeto em linguagem C implementa um sistema de gerenciamento de fornecedores com suporte a diferentes modos de operação, incluindo:
 
-## 💡 Funcionalidades
+- Interface local via terminal (modo normal)
+- Servidor e cliente TCP
+- Servidor HTTP básico
 
-- Adicionar fornecedor (nome, CNPJ, telefone, e-mail)
-- Listar fornecedores
-- Remover fornecedor por CNPJ
-- Execução local ou via rede (cliente TCP conecta a servidor remoto)
+O sistema permite adicionar, listar e remover fornecedores, com persistência em arquivo de texto (`fornecedores.txt`).
 
-## 📁 Estrutura do Projeto
+## 📁 Estrutura de Dados
 
-```
-.
-├── main.c              # Ponto de entrada principal
-├── fornecedor.c        # Funções relacionadas ao fornecedor
-├── fornecedor.h        # Header com definição da struct e protótipos
-├── servidor_tcp.c      # Implementação do modo servidor TCP
-├── cliente_tcp.c       # Implementação do cliente TCP
-├── Makefile (opcional)
-└── README.md           # Este arquivo
-```
+A estrutura principal utilizada é uma lista encadeada de fornecedores, contendo os seguintes campos:
 
-## 🚀 Execução
+- `nome`
+- `cnpj`
+- `telefone`
+- `email`
 
-### Compilação
+## 🚀 Funcionalidades
+
+- Adicionar, listar e remover fornecedores
+- Persistência dos dados em arquivo texto (`fornecedores.txt`)
+- Interface de menu local (terminal)
+- Comunicação via socket TCP entre cliente e servidor
+- Interface web básica via servidor HTTP
+
+## 🛠️ Requisitos
+
+- Sistema Windows (usa `<winsock2.h>`)
+- Compilador compatível com C (ex: GCC via MinGW ou Visual Studio)
+- Biblioteca `ws2_32.lib` para sockets no Windows
+
+## 🧭 Modos de Operação
+
+Ao iniciar o programa, você poderá selecionar o modo desejado:
+
+### 1. Modo Normal (Menu Local)
+Interface baseada em terminal para gerenciar fornecedores localmente.
+
+### 2. Servidor TCP
+Executa um servidor TCP que aceita conexões de clientes, recebendo comandos para gerenciar fornecedores remotamente.
+
+### 3. Cliente TCP
+Cliente que se conecta ao servidor TCP e envia comandos para adicionar, listar e remover fornecedores.
+
+### 4. Servidor HTTP
+Servidor web básico que exibe os fornecedores em uma página HTML. Permite exclusão via link.
+
+## 💡 Comandos TCP
+
+Os seguintes comandos são suportados via cliente TCP:
+
+- `ADD nome;cnpj;telefone;email`
+- `READ`
+- `DELETE cnpj`
+
+## 🌐 Interface Web (HTTP)
+
+- Acessar: `http://localhost:8080`
+- Lista todos os fornecedores cadastrados
+- Permite excluir diretamente via link
+
+## 🗂️ Arquivo de Dados
+
+- O arquivo `fornecedores.txt` é utilizado para salvar os dados entre execuções.
+- Formato: `nome;cnpj;telefone;email` por linha.
+
+## 🔧 Compilação
+
+Se estiver utilizando GCC no Windows (via MinGW), compile com:
 
 ```bash
-gcc main.c fornecedor.c servidor_tcp.c cliente_tcp.c -o fornecedores
+gcc -o fornecedores.exe fornecedores.c -lws2_32
 ```
-
-### Modo Local
-
-```bash
-./fornecedores
-```
-
-Siga as instruções no terminal para adicionar, listar ou remover fornecedores localmente.
-
-### Modo TCP
-
-#### 1. Servidor
-
-Em um terminal, inicie o servidor TCP:
-
-```bash
-./fornecedores servidor
-```
-
-#### 2. Cliente
-
-Em outro terminal, conecte-se como cliente:
-
-```bash
-./fornecedores cliente
-```
-
-Informe o IP do servidor e a porta (por padrão, a porta é 12345).
-
-## 📡 Comunicação TCP
-
-A comunicação cliente-servidor ocorre via socket TCP. O cliente envia comandos em texto (como `ADD`, `LIST`, `REMOVE`) e o servidor responde com mensagens de confirmação ou a lista de fornecedores.
-
-## ⚙️ Dependências
-
-- Compilador C (GCC recomendado)
-- Sistema compatível com sockets (Linux ou WSL recomendado para testes locais)
 
 ## ✅ Exemplo de uso
 
@@ -81,13 +88,17 @@ Telefone: (11) 99999-9999
 Email: contato@acme.com
 ```
 
-## 🧠 Observações
+## 📌 Observações
 
-- O campo `CNPJ` é usado como identificador único para remoção.
-- Toda a memória alocada dinamicamente é liberada ao final da execução.
-- A função `listar_fornecedores_str()` permite formatar a saída para resposta via socket.
+- Este sistema é apenas para fins educacionais e demonstração.
+- O servidor TCP aceita apenas uma conexão por vez.
+- O servidor HTTP não possui autenticação e é básico.
+
+## 📄 Licença
+
+Este projeto é de domínio público ou pode ser utilizado livremente para fins educacionais.
 
 ## 👨‍💻 Autores
 
 - Pedro Bonifácio
-- [Outros contribuidores, se houver]
+- Paulo Henrique
