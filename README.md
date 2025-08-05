@@ -82,10 +82,10 @@ gcc -o fornecedores.exe fornecedores.c -lws2_32
 3-Remover
 4-Sair
 Opção: 1
-Nome: ACME Corp
+Nome: Universidade Federal de Rondonópolis
 CNPJ: 12345678000190
 Telefone: (11) 99999-9999
-Email: contato@acme.com
+Email: universidade@ufr.com.br
 ```
 
 ## 📌 Observações
