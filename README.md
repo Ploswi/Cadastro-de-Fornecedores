@@ -1,4 +1,4 @@
-# Sistema de Gerenciamento de Fornecedores
+# Sistema de Cadastro de Fornecedores
 
 Este projeto em linguagem C implementa um sistema de gerenciamento de fornecedores com suporte a diferentes modos de operação, incluindo:
 
